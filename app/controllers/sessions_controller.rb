@@ -1,6 +1,6 @@
 class SessionsController < ApplicationController
     skip_before_action :login_required, only: [:new, :create]
-    
+
     def new
     end
 
@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
         if user&.authenticate(params[:session][:password])
             # ログイン成功した場合
             log_in(user)
-            redirect_to user_path(user.id)
+            redirect_to tasks_path(user.id)
           else
             flash.now[:danger] = 'メールアドレスまたはパスワードに誤りがあります'
             render :new
